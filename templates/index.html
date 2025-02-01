@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to JSON Converter</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    /* background-color: #e9ecef;  */
+    margin: 0;
+    padding: 20px;
+  height: 100%;
+  background-image: radial-gradient(circle, white,rgb(0, 183, 255));
+  /* background-size: cover; */
+}
+
+.container {
+    max-width: 350px;
+    height: 40vh;
+    margin: auto;
+    background: radial-gradient(circle,rgb(0, 234, 255),aliceblue);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    text-align: center; /* Center text */
+    margin-top: 150px;
+}
+
+h1 {
+    color: #343a40; /* Dark gray */
+}
+h2{
+    font-size: 15px;
+    color: #343a40;
+    padding: 10px;
+}
+
+.button-container {
+    display: grid;
+    justify-content: space-evenly; /* Center buttons */
+    align-items: center; /* Align vertically */
+}
+
+.file-input-label {
+    position: relative;
+  padding: 10px 20px;
+  border-radius: 7px;
+  border: 1px solid rgb(0, 0, 0);
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 2px;
+  background: transparent;
+  color: #343a40;
+  overflow: hidden;
+  box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+
+.file-input {
+    display: none; /* Hide the actual file input */
+}
+
+.file-input-label:hover {
+  background: rgb(179, 241, 255);
+  color: black;
+  box-shadow: 0 0 30px 5px rgba(0, 224, 236, 0.815);
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+}
+
+.file-input-label:hover::before {
+  -webkit-animation: sh02 0.5s 0s linear;
+  -moz-animation: sh02 0.5s 0s linear;
+  animation: sh02 0.5s 0s linear;
+}
+
+.file-input-label::before {
+  content: '';
+  display: block;
+  width: 0px;
+  height: 86%;
+  position: absolute;
+  top: 7%;
+  left: 0%;
+  opacity: 0;
+  background: #fff;
+  box-shadow: 0 0 50px 30px #0084ff;
+  -webkit-transform: skewX(-20deg);
+  -moz-transform: skewX(-20deg);
+  -ms-transform: skewX(-20deg);
+  -o-transform: skewX(-20deg);
+  transform: skewX(-20deg);
+}
+
+@keyframes sh02 {
+  from {
+    opacity: 0;
+    left: 0%;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    left: 100%;
+  }
+}
+
+.file-input-label:active {
+  box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: box-shadow 0.2s ease-in;
+  -moz-transition: box-shadow 0.2s ease-in;
+  transition: box-shadow 0.2s ease-in;
+}
+
+/* From Uiverse.io by mrhyddenn */ 
+.convert-btn {
+  position: relative;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border-radius: 7px;
+  border: 1px solid rgb(0, 0, 0);
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 2px;
+  background: transparent;
+  color: #343a40;
+  overflow: hidden;
+  box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+
+.convert-btn:hover {
+  background: rgb(179, 241, 255);
+  color: black;
+  box-shadow: 0 0 30px 5px rgba(0, 224, 236, 0.815);
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+}
+
+.convert-btn:hover::before {
+  -webkit-animation: sh02 0.5s 0s linear;
+  -moz-animation: sh02 0.5s 0s linear;
+  animation: sh02 0.5s 0s linear;
+}
+
+.convert-btn::before {
+  content: '';
+  display: block;
+  width: 0px;
+  height: 86%;
+  position: absolute;
+  top: 7%;
+  left: 0%;
+  opacity: 0;
+  background: #fff;
+  box-shadow: 0 0 50px 30px #00ff08;
+  -webkit-transform: skewX(-20deg);
+  -moz-transform: skewX(-20deg);
+  -ms-transform: skewX(-20deg);
+  -o-transform: skewX(-20deg);
+  transform: skewX(-20deg);
+}
+
+@keyframes sh02 {
+  from {
+    opacity: 0;
+    left: 0%;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    left: 100%;
+  }
+}
+
+.convert-btn:active {
+  box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: box-shadow 0.2s ease-in;
+  -moz-transition: box-shadow 0.2s ease-in;
+  transition: box-shadow 0.2s ease-in;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Convert PDF to JSON</h1>
+        <h2>Upload your pdf file to convert it into JSON format</h2>
+        <form action="/convert" method="post" enctype="multipart/form-data">
+            <div class="button-container">
+                <label for="pdf_file" class="file-input-label">Choose File</label>
+                <input type="file" id="pdf_file" name="pdf_file" accept=".pdf" required class="file-input">
+                <button type="submit" class="convert-btn">Convert</button>
+            </div>
+        </form>
+    </div>
+     <script>
+        // Automatically submit the form when a file is chosen
+        document.getElementById('pdf_file').addEventListener('change', function() {
+            document.getElementById('uploadForm').submit();
+        });
+    </script>        
+</body>
+</html>
